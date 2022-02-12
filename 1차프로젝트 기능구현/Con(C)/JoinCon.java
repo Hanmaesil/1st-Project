@@ -65,7 +65,7 @@ public class JoinCon extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
 			out.print("alert('회원가입 완료');");
-			out.print("location.href = 'joinsuccess.jsp';");
+			out.print("location.href = 'main.jsp';");
 			out.print("</script>");
 		}else {
 			response.setContentType("text/html; charset=UTF-8");
