@@ -36,17 +36,24 @@ public class ResultCon extends HttpServlet {
 		//맛
 		String[] taste = request.getParameterValues("tasteList");
 		int size = taste.length;
-		System.out.println("길이는" + size);
+		System.out.println("맛의 길이는" + size);
 		System.out.println(taste[0]);
 		//향
 		String[] flavor = request.getParameterValues("flavorList");
 		int size2 = flavor.length;
 		System.out.println("향의 길이는 " + size2);
-		System.out.println(flavor[0]);
+		
 		//옵션
 		String option = request.getParameter("option");
+		if(option == null) {
+			option = "or";
+		}
 		System.out.println("선택한 옵션은 > " + option);
 		
+//		if(flavor.length == 0) {
+//			flavor[0] = "";
+//		};
+		//System.out.println(flavor[0]);
 		
 		// dao 객체 생성
 		A_SearchDAO dao = new A_SearchDAO();

@@ -19,6 +19,7 @@ public class A_SearchDTO {
 	private int dr_abv;//도수
 	private String dr_des;//설명
 	private String dr_img; //이미지 경로
+	private int num;// 순서
 	
 	
 	
