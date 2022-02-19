@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 
+import model.A_JjimDAO;
 import model.A_SearchDAO;
 import model.A_SearchDTO;
 
@@ -29,7 +30,12 @@ public class ResultCon extends HttpServlet {
 		Gson gson = new Gson();
 		// JsonArray 객체 생성
 		JsonArray jarray = new JsonArray();
-
+		
+		//닉네임 가져오기
+		//일단 임의로 부여 -> 세션에 저장된 닉네임 가져오면 됨
+		String nick = "테스트";
+		
+		
 		// sort, 초성 가져오기
 		int sort = Integer.parseInt(request.getParameter("num"));
 		System.out.println(sort);
@@ -49,16 +55,20 @@ public class ResultCon extends HttpServlet {
 			option = "or";
 		}
 		System.out.println("선택한 옵션은 > " + option);
-		
-//		if(flavor.length == 0) {
-//			flavor[0] = "";
-//		};
-		//System.out.println(flavor[0]);
+
 		
 		// dao 객체 생성
 		A_SearchDAO dao = new A_SearchDAO();
 		// dto타입의 배열 생성
 		ArrayList<A_SearchDTO> list = dao.result(sort, taste, flavor, option);
+		
+		//찜테이블에 저장하기
+		
+		A_JjimDAO dao2 = new A_JjimDAO();
+		int cnt = dao2.insert(list, nick);
+		
+		
+		
 		
 		System.out.println("선택한 옵션은 " + option + "이며 총 갯수는 > " + list.size());
 

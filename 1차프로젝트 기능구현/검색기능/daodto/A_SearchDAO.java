@@ -68,7 +68,9 @@ public class A_SearchDAO {
 		 * 
 		 * }
 		 */
-		// 갑 가져오기
+		// 값 가져오기
+		
+		
 		if (option.equals("or")) {
 
 			sql = "select dr_id, dr_flavor, dr_taste, dr_abv, dr_des, dr_img, num from test3 where";
@@ -201,7 +203,6 @@ public class A_SearchDAO {
 
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 				close();

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%
+//찜목록을 위한 세션에 저장된 닉네임 가져오기
+//String nick = session.getAttribute("nick");
+String nick = "테스트";
+%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +12,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+	
+	<button onclick="location.href='Jjim.jsp'">찜한 정보 보러가기</button>
+	
+
+
 	<!-- 대분류  -->
 	<div id="sort">
 		<button type="submit" name="sort" value="1"
@@ -168,6 +178,11 @@
 		let flavorList = [];
 		//옵션 담을 변수
 		let option = "";
+		//찜카운터
+		let bSubmit = 1;
+		//닉네임
+		let nick = "<%=nick%>";
+		console.log(nick) 
 
 		//대분류 선택시 술 설명과 이미지 나오게 하기
 		function ButtonValue(event) {
@@ -481,7 +496,7 @@
 																+ "<td>이미지</td>"
 																+ "<td><img src = " + data.dr_img + "></td></tr>"
 																+ "<tr>"
-																+ "<td><button type = 'submit' name = 'jjim' value = 'num' onclick = ''>찜하기</button></td>"
+																+ "<td><button type = 'submit' id = '"+ data.num + "' value = '"+ data.num +"' onclick = 'Jjim(event)'>찜하기</button></td>"
 																+ "</tr>");
 
 									} else if (data.dr_des == null) {
@@ -517,7 +532,7 @@
 																+ "<td>이미지</td>"
 																+ "<td><img src = " + data.dr_img + "></td></tr>"
 																+ "<tr>"
-																+ "<td><button type = 'submit' name = 'jjim' value = 'num' onclick = ''>찜하기</button></td>"
+																+ "<td><button type = 'submit' id = '"+ data.num + "' value = '"+ data.num +"' onclick = 'Jjim(event)'>찜하기</button></td>"
 																+ "</tr>");
 
 									}
@@ -542,6 +557,71 @@
 			}
 
 		}
+		
+		//찜기능
+		function Jjim(event){
+			
+			//넘버링 가져오기
+			if(event.target.click){
+			let num = event.target.value;
+			let id = event.target.id;
+			let color = 
+			
+			
+				
+				
+			$("#"+id).css("color","red")
+			console.log("번호확인 > " + num)
+			$.ajax({
+				url : "JjimCon",
+				data : {"bSubmit" : bSubmit, "num" : num, "nick" : nick},
+				dataType : "json",
+				success : function(result){
+					alert("찜등록");
+				},
+				error : function(){
+					alert("찜등록");
+				}
+			});
+			
+			
+			/* if(bSubmit === 0){
+				//0이면 1로 바꾸기
+				bSubmit = 1;
+				console.log("번호확인 > " + num)
+				$.ajax({
+					url : "JjimCon",
+					data : {"bSubmit" : bSubmit, "num" : num},
+					dataType : "json",
+					success : function(result){
+						alert("찜등록");
+					},
+					error : function(){
+						alert("실패");
+					}
+				});
+			}else{
+				bSubmit = 0;
+				console.log("번호확인 > " + num)
+				$.ajax({
+					url : "JjimCon",
+					data : {"bSubmit" : bSubmit, "num" : num},
+					dataType : "json",
+					success : function(result){
+						alert("찜해제");
+					},
+					error : function(){
+						alert("실패");
+					}
+					
+					});
+			} */
+			
+			
+			}
+			
+		}
+		
 
 		//초기화 기능
 		function Reset(event) {
